@@ -6,6 +6,7 @@ from io import StringIO
 from pathlib import Path
 
 from sorting_hat import BANNER, assign_groups, main, read_students
+from sorting_hat_app import MAX_RESULT_COLUMNS, result_column_count
 
 
 class ReadStudentsTests(unittest.TestCase):
@@ -71,6 +72,15 @@ class CommandLineTests(unittest.TestCase):
 
         self.assertEqual(result, 1)
         self.assertIn("Could not read student file", error.getvalue())
+
+
+class ResultLayoutTests(unittest.TestCase):
+    def test_result_columns_are_limited_to_three(self):
+        self.assertEqual(result_column_count(0), 0)
+        self.assertEqual(result_column_count(1), 1)
+        self.assertEqual(result_column_count(2), 2)
+        self.assertEqual(result_column_count(3), 3)
+        self.assertEqual(result_column_count(6), MAX_RESULT_COLUMNS)
 
 
 if __name__ == "__main__":
