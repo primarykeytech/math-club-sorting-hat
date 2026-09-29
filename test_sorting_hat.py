@@ -6,7 +6,14 @@ from io import StringIO
 from pathlib import Path
 
 from sorting_hat import BANNER, assign_groups, main, read_students
-from sorting_hat_app import DEFAULT_STUDENT_FILE, MAX_RESULT_COLUMNS, result_column_count
+from sorting_hat_app import (
+    BACKGROUND_IMAGE,
+    DEFAULT_STUDENT_FILE,
+    MAX_RESULT_COLUMNS,
+    cover_subsample_factor,
+    cover_zoom_factor,
+    result_column_count,
+)
 
 
 class ReadStudentsTests(unittest.TestCase):
@@ -75,9 +82,25 @@ class CommandLineTests(unittest.TestCase):
 
 
 class ResultLayoutTests(unittest.TestCase):
+    def test_background_cover_scale_prevents_bars(self):
+        self.assertEqual(cover_subsample_factor(6000, 4000, 1920, 1080), 3)
+        self.assertEqual(cover_subsample_factor(6000, 4000, 3840, 2160), 1)
+        with self.assertRaises(ValueError):
+            cover_subsample_factor(0, 4000, 1920, 1080)
+
+    def test_background_zooms_when_fullscreen_is_larger_than_asset(self):
+        self.assertEqual(cover_zoom_factor(1536, 1024, 1920, 1080), 2)
+        self.assertEqual(cover_zoom_factor(3072, 2048, 1920, 1080), 1)
+        with self.assertRaises(ValueError):
+            cover_zoom_factor(1536, 0, 1920, 1080)
+
     def test_default_student_file_is_next_to_the_application(self):
         self.assertEqual(DEFAULT_STUDENT_FILE.name, "students.txt")
         self.assertEqual(DEFAULT_STUDENT_FILE.parent, Path(__file__).parent)
+
+    def test_magical_background_is_a_project_asset(self):
+        self.assertEqual(BACKGROUND_IMAGE.name, "magical_background.png")
+        self.assertTrue(BACKGROUND_IMAGE.is_file())
 
     def test_result_columns_are_limited_to_three(self):
         self.assertEqual(result_column_count(0), 0)

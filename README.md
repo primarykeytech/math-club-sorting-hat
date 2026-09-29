@@ -38,6 +38,9 @@ python sorting_hat_app.py
 
 Choose the student text file, enter the number of groups, and select **Start sorting**. The top-hat entry screen transitions to a results view, reveals each assignment with a short delay, and displays up to three group columns across.
 
+The desktop app uses the included `magical_background.png` artwork as a decorative backdrop behind the readable content panels.
+It opens fullscreen by default for projection; press `Esc` to leave fullscreen.
+
 ## Test
 
 ```powershell
