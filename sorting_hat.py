@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Sequence
 
 
-PROGRAM_NAME = "The Sorting Hat (TM)"
+PROGRAM_NAME = "The Hat that Sorts(TM)"
 BANNER = r'''
                     .-"""""""""-.
                   .'            '.
@@ -23,7 +23,7 @@ BANNER = r'''
              .-======================-.
             /__________________________\
 
-              The Sorting Hat (TM)
+              The Hat that Sorts(TM)
 '''
 
 

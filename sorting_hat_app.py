@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""A small desktop interface for The Sorting Hat (TM)."""
+"""A small desktop interface for The Hat that Sorts (TM)."""
 
 from __future__ import annotations
 
@@ -18,6 +18,7 @@ GOLD = "#c38b22"
 RED = "#7e2636"
 ASSIGNMENT_DELAY_MS = 650
 MAX_RESULT_COLUMNS = 3
+DEFAULT_STUDENT_FILE = Path(__file__).with_name("students.txt")
 
 
 def result_column_count(group_count: int, maximum: int = MAX_RESULT_COLUMNS) -> int:
@@ -36,7 +37,7 @@ class SortingHatApp(tk.Tk):
         self.configure(background=BACKGROUND)
         self.minsize(720, 580)
         configure_styles(self)
-        self.file_path = tk.StringVar()
+        self.file_path = tk.StringVar(value=str(DEFAULT_STUDENT_FILE))
         self.group_count = tk.IntVar(value=2)
         self._pending_assignments: list[tuple[int, str]] = []
         self._group_lists: list[tk.Listbox] = []
