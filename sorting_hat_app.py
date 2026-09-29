@@ -35,7 +35,7 @@ class SortingHatApp(tk.Tk):
         super().__init__()
         self.title(PROGRAM_NAME)
         self.configure(background=BACKGROUND)
-        self.minsize(720, 580)
+        self.minsize(960, 700)
         configure_styles(self)
         self.file_path = tk.StringVar(value=str(DEFAULT_STUDENT_FILE))
         self.group_count = tk.IntVar(value=2)
@@ -59,7 +59,7 @@ class SortingHatApp(tk.Tk):
         )
         subtitle.grid(row=1, column=0, columnspan=2, pady=(0, 22))
 
-        hat = tk.Canvas(frame, width=270, height=260, bg=BACKGROUND, highlightthickness=0)
+        hat = tk.Canvas(frame, width=330, height=290, bg=BACKGROUND, highlightthickness=0)
         hat.grid(row=2, column=0, padx=(0, 25), pady=10, sticky="n")
         self._draw_top_hat(hat)
 
@@ -96,7 +96,7 @@ class SortingHatApp(tk.Tk):
         canvas.create_rectangle(76, 150, 198, 172, fill=RED, outline=RED)
         canvas.create_line(90, 66, 90, 144, fill="#595959", width=3)
         canvas.create_arc(45, 180, 228, 239, start=190, extent=160, outline=GOLD, width=3)
-        canvas.create_text(136, 246, text="Ready to sort!", fill=INK, font=("Georgia", 13, "italic"))
+        canvas.create_text(136, 262, text="Ready to sort!", fill=INK, font=("Georgia", 16, "italic"))
 
     def _choose_file(self) -> None:
         selected = filedialog.askopenfilename(
@@ -140,7 +140,7 @@ class SortingHatApp(tk.Tk):
             ttk.Label(card, text=f"Group {index + 1}", style="Group.TLabel").pack(anchor="w")
             student_list = tk.Listbox(
                 card, height=max(3, len(group)), bg="#fffdf8", fg=INK, borderwidth=0,
-                highlightthickness=0, font=("Segoe UI", 11), activestyle="none",
+                highlightthickness=0, font=("Segoe UI", 16), activestyle="none",
             )
             student_list.pack(fill="both", expand=True, pady=(8, 0))
             self._group_lists.append(student_list)
@@ -171,14 +171,18 @@ def configure_styles(root: tk.Tk) -> None:
     """Set the visual theme on the application's own Tk window."""
     style = ttk.Style(root)
     style.theme_use("clam")
+    style.configure(".", font=("Segoe UI", 14))
     style.configure("App.TFrame", background=BACKGROUND)
     style.configure("Card.TFrame", background="#fffdf8", relief="solid", borderwidth=1)
-    style.configure("Title.TLabel", background=BACKGROUND, foreground=INK, font=("Georgia", 27, "bold"))
-    style.configure("Subtitle.TLabel", background=BACKGROUND, foreground="#65594d", font=("Segoe UI", 11))
-    style.configure("Field.TLabel", background="#fffdf8", foreground=INK, font=("Segoe UI", 10, "bold"))
-    style.configure("Hint.TLabel", background="#fffdf8", foreground="#65594d", font=("Segoe UI", 9))
-    style.configure("Group.TLabel", background="#fffdf8", foreground=RED, font=("Georgia", 15, "bold"))
-    style.configure("Start.TButton", background=GOLD, foreground="#ffffff", font=("Segoe UI", 11, "bold"), padding=9)
+    style.configure("Title.TLabel", background=BACKGROUND, foreground=INK, font=("Georgia", 36, "bold"))
+    style.configure("Subtitle.TLabel", background=BACKGROUND, foreground="#65594d", font=("Segoe UI", 16))
+    style.configure("Field.TLabel", background="#fffdf8", foreground=INK, font=("Segoe UI", 15, "bold"))
+    style.configure("Hint.TLabel", background="#fffdf8", foreground="#65594d", font=("Segoe UI", 13))
+    style.configure("Group.TLabel", background="#fffdf8", foreground=RED, font=("Georgia", 21, "bold"))
+    style.configure("TButton", font=("Segoe UI", 14), padding=7)
+    style.configure("TEntry", font=("Segoe UI", 14), padding=6)
+    style.configure("TSpinbox", font=("Segoe UI", 14), padding=6)
+    style.configure("Start.TButton", background=GOLD, foreground="#ffffff", font=("Segoe UI", 17, "bold"), padding=12)
     style.map("Start.TButton", background=[("active", "#a97216")])
 
 
