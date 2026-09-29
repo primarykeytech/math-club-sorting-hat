@@ -1,4 +1,4 @@
-# The Sorting Hat (TM)
+# The Hat That Sorts
 
 A small Python app that randomly places students listed one per line in a text file into balanced groups. It includes both a desktop interface and a command-line mode.
 
